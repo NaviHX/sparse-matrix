@@ -18,6 +18,10 @@ typedef struct Matrix
     node *elem;
 } matrix;
 
+matrix* matrixInit(int row,int col,int elem[]);
+matrix* matrixPlus(matrix* a,matrix* b);
+matrix* matrixMultiply(matrix* a,matrix* b);
+
 void workPlus();
 void workMultiply();
 
