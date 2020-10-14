@@ -18,9 +18,9 @@ typedef struct Matrix
     node *elem;
 } matrix;
 
-matrix* matrixInit(int row,int col,int elem[]);
-matrix* matrixPlus(matrix* a,matrix* b);
-matrix* matrixMultiply(matrix* a,matrix* b);
+matrix *matrixInit(int row, int col, int elem[]);
+matrix *matrixPlus(matrix *a, matrix *b);
+matrix *matrixMultiply(matrix *a, matrix *b);
 
 void workPlus();
 void workMultiply();
@@ -49,6 +49,27 @@ int main()
         }
     } while (arg);
     return 0;
+}
+
+matrix *matrixInit(int row, int col, int elem[])
+{
+    int count = 0;
+    matrix *ret = (matrix *)malloc(sizeof(matrix));
+    ret->row = row;
+    ret->col = col;
+    ret->elem = (node *)malloc(sizeof(node) * row * col);
+    for (int i = 0; i < row * col; i++)
+    {
+        if(elem[i]!=0)
+        {
+            ret->elem->val=elem[i];
+            ret->elem->x=i/col;
+            ret->elem->y=i%col;
+            count++;
+        }
+    }
+    ret->elem=(node*)realloc(ret->elem,sizeof(node)*count);
+    return ret;
 }
 
 void workPlus()
