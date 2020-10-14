@@ -4,17 +4,19 @@
 
 using namespace std;
 
-typedef struct MatrixNode{
+typedef struct MatrixNode
+{
     int val;
     int x;
     int y;
-}node;
+} node;
 
-typedef struct Matrix{
+typedef struct Matrix
+{
     int col;
     int row;
-    node* elem;
-}matrix;
+    node *elem;
+} matrix;
 
 void workPlus();
 void workMultiply();
@@ -47,10 +49,8 @@ int main()
 
 void workPlus()
 {
-
 }
 
 void workMultiply()
 {
-
 }
