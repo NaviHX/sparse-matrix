@@ -22,7 +22,7 @@ typedef struct Matrix
 matrix *matrixInit(int row, int col, int elem[]);
 matrix *matrixPlus(matrix *a, matrix *b);
 matrix *matrixMultiply(matrix *a, matrix *b);
-void matrixPrint(matrix* m);
+void matrixPrint(matrix *m);
 
 void workPlus();
 void workMultiply();
@@ -75,9 +75,30 @@ matrix *matrixInit(int row, int col, int elem[])
     return ret;
 }
 
+void matrixPrint(matrix *m)
+{
+    int offset = 0;
+    for (int i = 0; i < m->row; i++)
+    {
+        for (int j = 0; j < m->col; j++)
+        {
+            if (offset < m->size && m->elem[offset].x == i && m->elem[offset].y == j)
+            {
+                cout << m->elem[offset].val << " ";
+                offset++;
+            }
+            else
+            {
+                cout << "0 ";
+            }
+        }
+        cout << "\n";
+    }
+}
+
 matrix *matrixPlus(matrix *a, matrix *b)
 {
-    if (a->row == b->row && a->col == b->col)
+    if (a->row != b->row && a->col != b->col)
         return NULL;
     matrix *c = (matrix *)malloc(sizeof(matrix));
     c->row = a->row;
@@ -122,43 +143,45 @@ matrix *matrixPlus(matrix *a, matrix *b)
         pc->y = pb->y;
         pc++, pb++;
     }
-    c->size=pc-c->elem;
-    c->elem=(node*)realloc(c->elem,c->size);
+    c->size = pc - c->elem;
+    //c->elem = (node *)realloc(c->elem, c->size+1);
     return c;
 }
 
 void workPlus()
 {
-    int ar,ac;
-    int br,bc;
-    int* elema,*elemb;
-    cout<<"请输入矩阵A行数和列数(e.g. 3 3):";
-    cin>>ar>>ac;
-    elema=(int*)malloc(sizeof(int)*ar*ac);
-    cout<<"请输入矩阵A:\n";
-    for(int i=0;i<ar;i++)
-        for(int j=0;j<ac;j++)
-            cin>>elema[i*ac+j];
-    matrix* a=matrixInit(ar,ac,elema);
+    int ar, ac;
+    int br, bc;
+    int *elema, *elemb;
+    cout << "请输入矩阵A行数和列数(e.g. 3 3):";
+    cin >> ar >> ac;
+    elema = (int *)malloc(sizeof(int) * ar * ac);
+    cout << "请输入矩阵A:\n";
+    for (int i = 0; i < ar; i++)
+        for (int j = 0; j < ac; j++)
+            cin >> elema[i * ac + j];
+    matrix *a = matrixInit(ar, ac, elema);
     free(elema);
-    cout<<"请输入矩阵B行数和列数(e.g. 3 3):";
-    cin>>br>>bc;
-    cout<<"请输入矩阵B:\n";
-    for(int i=0;i<br;i++)
-        for(int j=0;j<bc;j++)
-            cin>>elema[i*bc+j];
-    matrix* b=matrixInit(br,bc,elemb);
+    cout << "请输入矩阵B行数和列数(e.g. 3 3):";
+    cin >> br >> bc;
+    elemb = (int *)malloc(sizeof(int) * br * bc);
+    cout << "请输入矩阵B:\n";
+    for (int i = 0; i < br; i++)
+        for (int j = 0; j < bc; j++)
+            cin >> elemb[i * bc + j];
+    matrix *b = matrixInit(br, bc, elemb);
     free(elemb);
-    matrix* c=matrixPlus(a,b);
-    if(c==NULL)
-        cout<<"不可相加: 行列数不相等\n";
+    matrix *c = matrixPlus(a, b);
+    if (c == NULL)
+        cout << "不可相加: 行列数不相等\n";
     else
     {
-        cout<<"和矩阵为:\n";
+        cout << "和矩阵为:\n";
         matrixPrint(c);
     }
 }
 
 void workMultiply()
 {
+    return;
 }
