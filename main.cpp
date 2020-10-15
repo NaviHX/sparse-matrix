@@ -60,17 +60,18 @@ matrix *matrixInit(int row, int col, int elem[])
     ret->row = row;
     ret->col = col;
     ret->elem = (node *)malloc(sizeof(node) * row * col);
+    node *p = ret->elem;
     for (int i = 0; i < row * col; i++)
     {
         if (elem[i] != 0)
         {
-            ret->elem->val = elem[i];
-            ret->elem->x = i / col;
-            ret->elem->y = i % col;
+            p->val = elem[i];
+            p->x = i / col;
+            p->y = i % col;
+            p++;
             count++;
         }
     }
-    ret->elem = (node *)realloc(ret->elem, sizeof(node) * count);
     ret->size = count;
     return ret;
 }
