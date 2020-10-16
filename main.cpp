@@ -53,6 +53,7 @@ int main()
             cout << "无效的选项\n";
             break;
         }
+        cout << "\n";
     } while (arg);
     return 0;
 }
