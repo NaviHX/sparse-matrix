@@ -24,6 +24,7 @@ matrix *matrixInit(int row, int col, int elem[]);
 matrix *matrixPlus(matrix *a, matrix *b);
 matrix *matrixMultiply(matrix *a, matrix *b);
 void matrixPrint(matrix *m);
+void matrixFree(matrix *m);
 matrix *matrixTrans(matrix *m);
 int *getRow(matrix *m, int row, node *p);
 
@@ -207,6 +208,10 @@ void workPlus()
         cout << "和矩阵为:\n";
         matrixPrint(c);
     }
+    matrixFree(a);
+    matrixFree(b);
+    matrixFree(c);
+    return;
 }
 
 int *getRow(matrix *m, int row, node *p)
@@ -268,6 +273,7 @@ matrix *matrixMultiply(matrix *a, matrix *b)
             }
         }
     }
+    matrix(b);
     return c;
 }
 
@@ -303,5 +309,14 @@ void workMultiply()
         cout << "乘积矩阵为:\n";
         matrixPrint(c);
     }
+    matrixFree(a);
+    matrixFree(b);
+    matrixFree(c);
     return;
+}
+
+void matrixFree(matrix *m)
+{
+    free(m->elem);
+    free(m);
 }
