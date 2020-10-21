@@ -274,7 +274,8 @@ matrix *matrixMultiply(matrix *a, matrix *b)
             }
         }
     }
-    matrix(b);
+    matrixFree(b);
+    b = bTrans;
     return c;
 }
 
